@@ -1,3 +1,4 @@
+
 public class MicroInstrucao {
     public int nextAddress; 
     public int jam;         

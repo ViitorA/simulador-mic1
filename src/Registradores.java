@@ -1,3 +1,4 @@
+
 public class Registradores {
     public int MAR = 0; 
     public int MDR = 0; 
@@ -14,6 +15,7 @@ public class Registradores {
 
     public int MPC = 0; 
     
+    // Flags de Negativo e Zero
     public boolean N = false; 
     public boolean Z = false; 
 

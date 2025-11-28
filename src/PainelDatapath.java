@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,7 +18,7 @@ public class PainelDatapath extends JPanel {
         g2.setStroke(new BasicStroke(2));
 
         int w = getWidth();
-        int h = getHeight();
+        
         // Ajuste do centro para garantir espaço para a Cache na direita
         int xBase = Math.max(50, w / 2 - 250); 
 
@@ -28,7 +29,6 @@ public class PainelDatapath extends JPanel {
         String instrucaoAtual = getMnemonico((sim.reg.MDR >> 12) & 0xF);
         g2.drawString("Instrucao MAC-1 Atual (IR): " + instrucaoAtual, 20, 40);
 
-        // --- CORREÇÃO: Cache movida para xBase + 420 para não cobrir o AC ---
         desenharCache(g2, xBase + 420, 80);
 
         // --- Registradores (Layout em U) ---

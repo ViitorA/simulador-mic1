@@ -1,28 +1,29 @@
-import java.util.HashMap;
-import java.util.Map;
 
 public class Montador {
     public static int[] montar(String codigoFonte) {
-        String[] linhas = codigoFonte.split("\n");
-        // Aumentado para 4096 para cobrir toda a memória endereçável do MAC-1
+        String[] linhas = codigoFonte.split("\n"); // separa cada linha
         int[] memoria = new int[4096]; 
         int end = 0; // Endereço atual para instruções sequenciais
         
         for(String linha : linhas) {
             linha = linha.trim().toUpperCase();
-            if(linha.isEmpty() || linha.startsWith(";") || linha.startsWith("//")) continue;
             
-            // Remove comentários inline (ex: "LODD 10 // comentario")
+            // Ignora se for ou linha vazia ou uma linha-comentário
+            if(linha.isEmpty() || linha.startsWith("//")) continue;
+            
+            // Remove comentários inline
             if(linha.contains("//")) {
                 linha = linha.split("//")[0].trim();
             }
 
+            // Divide a linha por espaço (LODD 5 -> LODD, 5)
             String[] partes = linha.split("\\s+");
+
             if(partes.length == 0) continue;
 
             String mnemonico = partes[0];
             
-            // --- NOVA FUNCIONALIDADE: Definição de Dados (DW) ---
+            // --- Definição de Dados (DW) ---
             // Permite escrever "DW 100 10" para colocar o valor 10 no endereço 100
             if(mnemonico.equals("DW")) {
                 if(partes.length >= 3) {
@@ -48,6 +49,7 @@ public class Montador {
             int opcode = 0;
             boolean instrucaoValida = true;
 
+            // TODO: Adicionar o resto dos mneumônicos
             switch(mnemonico) {
                 case "LODD": opcode = 0x0; break; 
                 case "STOD": opcode = 0x1; break; 
